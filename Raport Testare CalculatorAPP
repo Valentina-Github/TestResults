@@ -1,0 +1,110 @@
+Raport despre evaluarea a codului Calculator.java
+    1. Introducere
+În acest raport, am analizat implementarea clasei Calculator.java, care permite evaluarea expresiilor matematice simple, având în vedere operatorii de bază: adunare, scădere, înmulțire și împărțire. Scopul evaluării este de a verifica corectitudinea implementării pentru a asigura calcularea corectă a expresiilor, conform ordinii de precedență a operatorilor.
+    2. Rezumatul Evaluării
+Au fost evaluate 3 expresii matematice folosind metoda Run, care implementează evaluarea de expresii. În toate cazurile, rezultatele obținute nu au fost cele așteptate din cauza unei probleme în ordonarea operațiilor, care nu respectă complet precedența corectă a operatorilor.
+• Expresiile evaluate: 1. "3 + 5 * 2" – Așteptat: 13.0, Obținut: 16.0
+2. "10 / 2 + 3.5" – Așteptat: 8.5, Obținut: 8.0
+3. "3.5 + 5 * 2.1" – Așteptat: 13.5, Obținut: 16.5
+Problema principală: Operatorul de înmulțire (*) nu este evaluat corect înainte de operatorul de adunare (+), ceea ce duce la rezultate incorecte.
+    3. Detalii despre Rezultatele Evaluării
+În toate testele efectuate, s-a observat o greșeală în evaluarea ordinii operatorilor, iar rezultatele nu au fost corecte.
+• Total Expresii Evaluare: 3
+• Expresii Corecte: 0
+• Expresii Incorecte: 3
+    4. Observații
+Deși metoda de evaluare este bine concepută, există câteva observații pentru îmbunătățirea implementării:
+        ◦ Corectarea precedenței operatorilor: Este necesar să te asiguri că operatorii * și / sunt evaluați înainte de operatorii + și -. În prezent, expresiile care conțin aceste operatori dau rezultate incorecte.
+        ◦ Tratamentul erorilor: În cazul în care sunt întâlnite expresii invalide sau cu erori de sintaxă, ar fi util să returnezi un mesaj clar care să ajute utilizatorul să înțeleagă problema (de exemplu, dacă există paranteze neînchise sau caractere invalide).
+    5. Concluzii
+Metoda de evaluare a expresiilor din clasa Calculator nu calculează corect expresiile care conțin atât operații de înmulțire, cât și de adunare. Rezultatele obținute nu respectă ordinea de precedență a operatorilor, ceea ce conduce la valori incorecte. Este necesară o corectare a algoritmului pentru a gestiona corect precedența operatorilor și pentru a valida intrările.
+
+
+Raport Testare - Clasa CalculatorTest
+
+1. Introducere
+În cadrul acestui raport, au fost testate funcționalitățile clasei CalculatorTest, care este destinată testării funcțiilor implementate în clasa Calculator. Testele au fost realizate folosind framework-ul JUnit 5 și au avut ca scop verificarea corectitudinii operațiunilor de bază ale unui calculator simplu. Printre funcțiile testate se numără adunarea, scăderea, înmulțirea și împărțirea, precum și gestionarea corectă a erorilor, cum ar fi împărțirea la zero.
+
+2. Rezumatul Testelor
+În cadrul testării, au fost efectuate 5 teste, fiecare având scopul de a verifica corectitudinea funcționării operațiunilor calculatorului. Testele au fost implementate pentru a valida:
+    • Corectitudinea operațiilor fundamentale (adunare, scădere, înmulțire, împărțire).
+    • Comportamentul corect al aplicației atunci când se întâlnesc erori (cum ar fi împărțirea la zero).
+Testele efectuate:
+    1. testMultiplication: Verifică corectitudinea operației de înmulțire.
+    2. testAddition: Verifică corectitudinea operației de adunare.
+    3. testDivisionByZero: Verifică comportamentul corect în cazul împărțirii la zero.
+    4. testDivision: Verifică corectitudinea operației de împărțire cu valori valide.
+    5. testSubtraction: Verifică corectitudinea operației de scădere.
+
+3. Rezultatele Testelor
+Rezultatele testelor sunt detaliate mai jos, iar toate testele au fost rulate fără erori. Cu toate acestea, un test a generat o diferență între rezultatul așteptat și cel real:
+Detalii despre Rezultatele Testelor:
+    • Total Teste: 5
+    • Teste cu Eșecuri: 1
+    • Teste cu Erori: 0
+    • Teste Omitte (skipped): 0
+
+4. Detaliile Testului care a Eșuat
+Testul care a eșuat este testValidExpressionWithMultiplication, care verifică expresia matematică 3 + 5 * 2.
+Rezultatul Așteptat: 13.0
+Rezultatul Obținut: 16.0
+Detalii despre eroare:
+    • Erorile s-au produs din cauza faptului că operatorii nu au fost evaluați în ordinea corectă a prioritații, iar expresia 3 + 5 * 2 a fost evaluată ca 8 * 2 = 16 în loc de 3 + 10 = 13.
+    • Acesta sugerează că logica de evaluare a operatorilor în funcția Run() din clasa Calculator nu respectă complet regulile de prioritate (multiplicarea ar trebui să aibă prioritate față de adunare).
+
+5. Observații și Sugestii
+Deși majoritatea testelor au trecut cu succes, ar fi util să se ia în considerare următoarele sugestii pentru îmbunătățirea testării și corectitudinii funcțiilor:
+    • Corectarea evaluării priorității operatorilor: În cazul testului care a eșuat, este necesară o revizuire a ordinii de evaluare a expresiilor pentru a respecta corect prioritatea operatorilor matematici.
+    • Testarea cu valori negative: Se recomandă adăugarea unor teste care să verifice corectitudinea operațiunilor cu numere negative, pentru a asigura comportamentul corect al calculatorului în aceste scenarii.
+    • Testarea cu intrări invalide: Este important să includem teste pentru a evalua modul în care aplicația gestionează intrările invalide (de exemplu, caractere non-numerice sau null).
+
+6. Concluzii
+În general, funcționalitățile calculatorului au fost implementate corect, iar majoritatea testelor au trecut cu succes. Cu toate acestea, a fost necesar să se corecteze logica de evaluare a operatorilor pentru a respecta ordinea corectă a operațiunilor. Pe viitor, este recomandat să se adauge teste suplimentare care să acopere cazuri speciale, cum ar fi intrările invalide și evaluarea corectă a expresiilor complexe.
+
+7. Omissiuni
+Testele actuale nu au acoperit:
+    • Evaluarea completă a expresiilor cu paranteze: Ar fi util să se includă teste care implică paranteze pentru a verifica respectarea corectă a regulilor de precedență a operatorilor.
+    • Verificarea performanței: Testele nu au verificat performanța operațiunilor, în special în cazuri cu numere mari.
+
+
+Raport Testare - Clasa CalculatorAcceptanceTest
+
+1. Introducere
+În cadrul acestui raport, au fost testate funcționalitățile clasei CalculatorAcceptanceTest, care are scopul de a verifica comportamentul general și corectitudinea aplicării operațiunilor pe calculator, pe baza expresiilor matematice mai complexe. Testele au fost realizate folosind framework-ul JUnit 5 și au vizat expresii matematice variate, inclusiv expresii cu paranteze, multiplicare, împărțire și expresii invalide.
+2. Rezumatul Testelor
+În cadrul testării, au fost efectuate 5 teste, fiecare având scopul de a verifica corectitudinea funcționării operațiunilor calculatorului. Testele au fost implementate pentru a valida:
+    • Corectitudinea evaluării expresiilor matematice care includ paranteze.
+    • Corectitudinea evaluării expresiilor cu multiplicare și împărțire.
+    • Comportamentul corect al aplicației în cazul în care apar erori, cum ar fi împărțirea la zero.
+    • Tratarea corectă a expresiilor invalide.
+Testele efectuate:
+    1. testValidExpressionWithParentheses: Verifică evaluarea corectă a expresiilor cu paranteze.
+    2. testValidExpressionWithMultiplication: Verifică evaluarea corectă a expresiilor cu multiplicare.
+    3. testComplexExpression: Verifică evaluarea corectă a unor expresii mai complexe.
+    4. testDivisionByZero: Verifică comportamentul calculatorului în cazul împărțirii la zero.
+    5. testInvalidExpression: Verifică gestionarea expresiilor invalide.
+3. Rezultatele Testelor
+Rezultatele testelor sunt detaliate mai jos, iar toate testele au fost rulate fără erori majore. Totuși, un test a generat o diferență între rezultatul așteptat și cel real:
+Detalii despre Rezultatele Testelor:
+    • Total Teste: 5
+    • Teste cu Eșecuri: 1
+    • Teste cu Erori: 0
+    • Teste Omitte (skipped): 0
+4. Detaliile Testului care a Eșuat
+Testul care a eșuat este testValidExpressionWithMultiplication, care verifică evaluarea expresiei matematice 3 + 5 * 2.
+Rezultatul Așteptat: 13.0
+Rezultatul Obținut: 16.0
+Detalii despre eroare:
+    • Erorile au apărut din cauza faptului că operatorii nu au fost evaluați în ordinea corectă a prioritații. Expresia 3 + 5 * 2 a fost evaluată ca fiind 8 * 2 = 16, în loc de 3 + 10 = 13.
+    • Aceasta sugerează că logica de evaluare a operatorilor din funcția Run() nu respectă complet regulile de prioritate ale operatorilor (multiplicarea ar trebui să aibă prioritate față de adunare).
+5. Observații și Sugestii
+Deși majoritatea testelor au fost executate cu succes, ar fi util să se ia în considerare următoarele sugestii pentru îmbunătățirea corectitudinii funcțiilor și extinderea testării:
+    • Corectarea evaluării priorității operatorilor: Este necesar să se revizuiască ordinea de evaluare a expresiilor pentru a respecta corect prioritatea operatorilor matematici. În cazul testului care a eșuat, operatorul de multiplicare ar trebui să fie evaluat înaintea adunării.
+    • Testarea expresiilor complexe: Ar fi util să adăugați mai multe teste pentru expresii complexe care includ mai multe operații de bază, paranteze și operatori cu prioritate diferită.
+    • Testarea cu valori invalide: Se recomandă adăugarea unor teste care să verifice comportamentul aplicației în fața intrărilor invalide (de exemplu, caractere non-numerice, null sau expresii nevalide).
+6. Concluzii
+În general, funcționalitățile calculatorului au fost implementate corect, iar majoritatea testelor au trecut cu succes. Cu toate acestea, a fost necesar să se corecteze logica de evaluare a operatorilor pentru a respecta corect ordinea de evaluare a operațiunilor. Este recomandat să se adauge teste suplimentare pentru a acoperi cazuri speciale și a verifica completitudinea implementării.
+7. Omissiuni
+Testele actuale nu au acoperit:
+    • Evaluarea expresiilor cu paranteze: Ar fi util să se includă teste care implică paranteze pentru a verifica respectarea corectă a regulilor de precedență a operatorilor.
+    • Performanța: Testele nu au verificat performanța aplicației la procesarea unor expresii complexe sau la intrări mari.
